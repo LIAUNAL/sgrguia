@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía Integral de Formulación de Proyectos SGR & MGA-WEB</title>
+  <meta name="description" content="Guía interactiva y presentación metodológica para la formulación, evaluación y estructuración de proyectos de inversión pública en el Sistema General de Regalías (SGR) y MGA-WEB.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       HEADER SUPERIOR FIJO Y BARRA DE CONTROL
+       ======================================================================== -->
+  <header class="app-header">
+    <div class="brand-section">
+      <span class="brand-badge">SGR 2025</span>
+      <div>
+        <div class="brand-title">Guía Metodológica SGR & MGA-WEB</div>
+        <div class="brand-subtitle">Estructuración, Evaluación y Documento Técnico de Soporte (DTS)</div>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="global-search-input" class="search-input" placeholder="Buscar en la guía...">
+      </div>
+
+      <button id="btn-toggle-presentation" class="btn btn-mode-toggle" title="Abrir diapositivas de presentación">
+        🖥️ Modo Presentación
+      </button>
+
+      <button id="theme-toggle-btn" class="btn" title="Alternar tema claro/oscuro">
+        🌙 Modo Oscuro
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       CONTENEDOR PRINCIPAL: MODO GUÍA
+       ======================================================================== -->
+  <div id="guide-view" class="main-layout">
+    
+    <!-- Barra Lateral de Navegación -->
+    <aside class="sidebar">
+      <div class="sidebar-title">Contenido Metodológico</div>
+      <ul class="nav-list">
+        <li class="nav-item active"><a href="#resumen-ejecutivo">📌 Resumen Ejecutivo</a></li>
+        <li class="nav-item"><a href="#modulo-1-marco">🏛️ 1. Marco General e Inversión</a></li>
+        <li class="nav-item"><a href="#modulo-2-sgr">💰 2. Sistema General de Regalías</a></li>
+        <li class="nav-item"><a href="#modulo-3-identificacion">🎯 3. Fase de Identificación</a></li>
+        <li class="nav-item"><a href="#modulo-4-preparacion">⚙️ 4. Fase de Preparación</a></li>
+        <li class="nav-item"><a href="#modulo-5-evaluacion">📊 5. Evaluación Económica (TSD)</a></li>
+        <li class="nav-item"><a href="#modulo-6-programacion">📅 6. Programación y Políticas</a></li>
+        <li class="nav-item"><a href="#modulo-7-dts">📑 7. Caso Práctico DTS</a></li>
+      </ul>
+
+      <div class="nav-divider"></div>
+
+      <div class="sidebar-title">Herramientas Prácticas</div>
+      <ul class="nav-list">
+        <li class="nav-item"><a href="#herramienta-simulador-sgr">🧮 Simulador Presupuestal SGR</a></li>
+        <li class="nav-item"><a href="#herramienta-arbol-interactivo">🌳 Constructor de Árboles</a></li>
+        <li class="nav-item"><a href="#herramienta-calculadora-rpc">📈 Calculadora de Flujo Económico</a></li>
+        <li class="nav-item"><a href="#herramienta-checklist">✅ Checklist Maduración Fase III</a></li>
+        <li class="nav-item"><a href="#sintesis-corpus">📚 Síntesis Corpus (495 págs.)</a></li>
+      </ul>
+    </aside>
+
+    <!-- Área de Contenido Principal -->
+    <main class="content-area">
+
+      <!-- Hero Banner -->
+      <section id="resumen-ejecutivo" class="hero-card">
+        <div class="hero-tagline">🚀 Doctrina y Estándar Técnico Vigente 2025–2026</div>
+        <h1 class="hero-title">Guía de Formulación y Estructuración de Proyectos SGR</h1>
+        <p class="hero-desc">
+          Esta plataforma condensa y estandariza los fundamentos conceptuales, normativos y operativos para estructurar proyectos de inversión pública en el <strong>Sistema General de Regalías (SGR)</strong> y diligenciarlos con éxito en la plataforma <strong>MGA-WEB</strong> del DNP, incluyendo la redacción del <strong>Documento Técnico de Soporte (DTS)</strong> en Fase III.
+        </p>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-val">495</span>
+            <span class="stat-lbl">Páginas de Análisis</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val">9.0%</span>
+            <span class="stat-lbl">Tasa Social Descuento</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val">92.5%</span>
+            <span class="stat-lbl">Asignación Inversión</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val">Fase III</span>
+            <span class="stat-lbl">Factibilidad en Obras</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Nota de Anonimización y Neutralidad -->
+      <div class="callout callout-info">
+        <div class="callout-title">ℹ️ Protocolo de Neutralidad y Confidencialidad Institucional</div>
+        <p>
+          En estricto cumplimiento de los principios de confidencialidad y neutralidad académica, los nombres propios de instituciones universitarias formuladoras, entidades territoriales y corregimientos presentes en el corpus pedagógico original han sido sustituidos por identificadores estandarizados:
+          <strong>Entidad 1</strong> (Institución Académica Formuladora), <strong>Entidad 2</strong> (Entidad Territorial Municipal Ejecutora), <strong>Entidad 3</strong> (Gobernación Departamental Cofinanciadora) y <strong>Corregimientos A–D</strong>.
+        </p>
+      </div>
+
+      <!-- Módulo 1 -->
+      <section id="modulo-1-marco" class="guide-section">
+        <div class="section-header">
+          <div>
+            <span class="section-tag">Fundamentación</span>
+            <h2 class="section-title">1. Marco General de Proyectos de Inversión Pública</h2>
+          </div>
+        </div>
+        <p class="section-lead">
+          Doctrina basada en los lineamientos pedagógicos de <em>Entidad 1</em> y el ciclo del Sistema Nacional de Inversión Pública (SNIP).
+        </p>
+
+        <p>
+          Un <strong>proyecto de inversión pública</strong> es una unidad operacional que vincula recursos públicos (físicos, humanos, tecnológicos y financieros) para resolver una necesidad social sentida o aprovechar una oportunidad de desarrollo, mediante la generación, ampliación, mejoramiento o recuperación de bienes y servicios del Estado.
+        </p>
+
+        <div class="cards-grid">
+          <div class="info-card">
+            <div class="info-card-header">
+              <span class="info-card-icon">🧭</span>
+              <h3 class="info-card-title">Jerarquía de la Planeación</h3>
+            </div>
+            <p>
+              Todo proyecto SGR debe articularse estrictamente en la cadena:
+              <code>Plan de Desarrollo (PND / PDD / PDM) ➔ Línea Estratégica ➔ Programa ➔ Proyecto ➔ Actividad ➔ Tarea</code>.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card-header">
+              <span class="info-card-icon">🔒</span>
+              <h3 class="info-card-title">Regla de Oro Presupuestal</h3>
+            </div>
+            <p>
+              Con recursos del SGR <strong>únicamente se financian gastos de inversión</strong>. Está prohibido por ley financiar gastos permanentes de funcionamiento, nóminas ordinarias o pagos corrientes del Estado.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card-header">
+              <span class="info-card-icon">💻</span>
+              <h3 class="info-card-title">Ecosistema Digital del SGR</h3>
+            </div>
+            <p>
+              El ciclo opera en 4 plataformas interconectadas: <strong>MGA-WEB</strong> (formulación), <strong>SUIFP-Territorio</strong> (viabilidad y radicación), <strong>GESPROY</strong> (seguimiento físico/financiero) y <strong>SECOP II</strong> (contratación).
+            </p>
+          </div>
+        </div>
+
+        <div class="callout callout-warning">
+          <div class="callout-title">⚠️ Consulta Previa y Consentimiento Libre, Previo e Informado (CLPI)</div>
+          <p>
+            Cuando el proyecto interviene territorios colectivos de comunidades indígenas, NARP o Rrom, se exige la certificación previa del Ministerio del Interior y el agotamiento estricto de las etapas de Consulta Previa (Convenio 169 OIT y Decreto 1374 de 2021) como requisito de viabilidad técnica antes de la radicación en SUIFP.
+          </p>
+        </div>
+      </section>
+
+      <!-- Módulo 2 -->
+      <section id="modulo-2-sgr" class="guide-section">
+        <div class="section-header">
+          <div>
+            <span class="section-tag">Normativa & Presupuesto</span>
+            <h2 class="section-title">2. Sistema General de Regalías (SGR)</h2>
+          </div>
+        </div>
+        <p class="section-lead">
+          Estructura según la Ley 2056 de 2020, Decreto 1821 de 2021 y Ley 2441 de 2024 (Presupuesto Bienal 2025–2026 de $30,9 billones).
+        </p>
+
+        <p>
+          El SGR administra los ingresos derivados de la explotación de recursos naturales no renovables. Su distribución legal de ingresos corrientes se subdivide en tres grandes macrobolsas:
+        </p>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Macrobolsa</th>
+                <th>Porcentaje</th>
+                <th>Subfuentes / Destinación</th>
+                <th>Instancia Decisora</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Inversión</strong></td>
+                <td><strong>92.5%</strong></td>
+                <td>
+                  • 25% Asignaciones Directas (productores/puertos)<br>
+                  • 34% Asignación para la Inversión Regional (60% Dptos / 40% OCAD Regional)<br>
+                  • 15% Asignación Inversión Local (municipios NBI más pobres y étnicos)<br>
+                  • 10% Ciencia, Tecnología e Innovación (CTeI)<br>
+                  • 7% Asignación para la Paz (170 municipios PDET)<br>
+                  • 1% Asignación Ambiental (conservación y deforestación)<br>
+                  • 0.5% Municipios ribereños Río Magdalena y Canal del Dique
+                </td>
+                <td>Entidades Territoriales (Alcaldías / Gobernaciones) / OCAD Regional / OCAD Paz / OCAD CTeI</td>
+              </tr>
+              <tr>
+                <td><strong>Ahorro</strong></td>
+                <td><strong>4.5%</strong></td>
+                <td>
+                  • 2.25% Fondo de Ahorro y Estabilización (FAE)<br>
+                  • 2.25% Fondo Nacional de Pensiones de las Entidades Territoriales (FONPET)
+                </td>
+                <td>Ministerio de Hacienda y Crédito Público (MHCP)</td>
+              </tr>
+              <tr>
+                <td><strong>Administración y Control</strong></td>
+                <td><strong>3.0%</strong></td>
+                <td>
+                  • 2.0% Funcionamiento, operatividad y fiscalización minero-energética<br>
+                  • 1.0% Sistema de Seguimiento, Evaluación y Control (SSEC / DNP)
+                </td>
+                <td>Comisión Rectora del SGR / DNP / ANH / ANM</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Widget Interactivo: Simulador SGR -->
+        <div id="herramienta-simulador-sgr" class="widget-box">
+          <h3 class="widget-title">🧮 Simulador Interactivo de Distribución SGR</h3>
+          <p class="widget-desc">
+            Calcule la distribución legal exacta ingresando el monto total de ingresos corrientes del bienio en pesos colombianos (COP).
+          </p>
+
+          <div class="form-group">
+            <label class="form-label" for="sgr-presupuesto-input">Presupuesto Bienal Total (COP):</label>
+            <input type="number" id="sgr-presupuesto-input" class="form-control" value="30900000000000" step="1000000000">
+            <small style="color: var(--text-muted); font-size: 0.8rem;">Valor precargado: $30,9 Billones (Ley 2441/2024, Bienio 2025–2026).</small>
+          </div>
+
+          <button id="btn-calcular-sgr" class="btn btn-primary">Simular Distribución Legal</button>
+
+          <div class="results-grid">
+            <div class="result-card">
+              <div class="result-card-title">Inversión Total (92.5%)</div>
+              <div id="res-sgr-inversion" class="result-card-value">$ 0</div>
+              <div class="result-card-detail">Destinada a proyectos en territorios y regiones.</div>
+            </div>
+            <div class="result-card">
+              <div class="result-card-title">Ahorro Territorial (4.5%)</div>
+              <div id="res-sgr-ahorro" class="result-card-value">$ 0</div>
+              <div class="result-card-detail">FAE (2.25%) + FONPET (2.25%).</div>
+            </div>
+            <div class="result-card">
+              <div class="result-card-title">Admin & SSEC (3.0%)</div>
+              <div id="res-sgr-admin" class="result-card-value">$ 0</div>
+              <div class="result-card-detail">Fiscalización y seguimiento DNP.</div>
+            </div>
+            <div class="result-card">
+              <div class="result-card-title">Asignaciones Directas (25%)</div>
+              <div id="res-sgr-directas" class="result-card-value">$ 0</div>
+              <div class="result-card-detail">Municipios y Departamentos productores.</div>
+            </div>
+            <div class="result-card">
+              <div class="result-card-title">Inversión Regional (34%)</div>
+              <div id="res-sgr-regional" class="result-card-value">$ 0</div>
+              <div class="result-card-detail">60% Gobernaciones / 40% OCAD Regional.</div>
+            </div>
+            <div class="result-card">
+              <div class="result-card-title">Inversión Local (15%)</div>
+              <div id="res-sgr-local" class="result-card-value">$ 0</div>
+              <div class="result-card-detail">12.68% municipios pobres + 2.32% étnicos.</div>
+            </div>
+            <div class="result-card">
+              <div class="result-card-title">CTeI (10%)</div>
+              <div id="res-sgr-ctei" class="result-card-value">$ 0</div>
+              <div class="result-card-detail">MinCiencias (min 20% ambiental).</div>
+            </div>
+            <div class="result-card">
+              <div class="result-card-title">Paz (7%)</div>
+              <div id="res-sgr-paz" class="result-card-value">$ 0</div>
+              <div class="result-card-detail">170 Municipios PDET / OCAD Paz.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Módulo 3 -->
+      <section id="modulo-3-identificacion" class="guide-section">
+        <div class="section-header">
+          <div>
+            <span class="section-tag">Metodología MGA</span>
+            <h2 class="section-title">3. Fase de Identificación (Módulo 1 MGA)</h2>
+          </div>
+        </div>
+        <p class="section-lead">
+          Estructuración del Enfoque de Marco Lógico (EML), diagnóstico causal, análisis de involucrados y alternativas de solución.
+        </p>
+
+        <div class="callout callout-danger">
+          <div class="callout-title">🚫 Regla de Oro en la Formulación del Problema Central</div>
+          <p>
+            <strong>Jamás defina el problema central como la "falta de una solución"</strong>.
+            Ejemplo incorrecto: <em>"Falta de aulas escolares en la Entidad 2"</em>.
+            Ejemplo correcto: <em>"Altos niveles de deserción escolar e inadecuadas condiciones pedagógicas en la zona rural de la Entidad 2"</em>.
+          </p>
+        </div>
+
+        <p>
+          El <strong>Árbol de Problemas</strong> mapea las relaciones de causa-efecto que explican la situación insatisfactoria. Cada causa directa debe convertirse en un objetivo específico, y cada causa indirecta en una actividad o componente en el <strong>Árbol de Objetivos</strong>.
+        </p>
+
+        <!-- Constructor de Árboles Interactivo -->
+        <div id="herramienta-arbol-interactivo" class="widget-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h3 class="widget-title" style="margin-bottom: 0;">🌳 Visualizador Dinámico: Problemas vs. Objetivos</h3>
+            <button id="btn-toggle-arbol" class="btn btn-primary">🔄 Transformar a Árbol de Objetivos</button>
+          </div>
+          <p class="widget-desc">
+            Explore cómo la estructura negativa del <strong>Árbol de Problemas</strong> se convierte metodológicamente en la situación positiva del <strong>Árbol de Objetivos</strong>, tal como se diligencia en MGA-WEB.
+          </p>
+
+          <!-- Vista 1: Árbol de Problemas -->
+          <div id="arbol-problemas-view" class="tree-container">
+            <div style="font-weight: 700; color: var(--accent); font-size: 0.85rem;">COPA: EFECTOS (CONSECUENCIAS)</div>
+            <div class="tree-level">
+              <div class="tree-node tree-node-effect"><strong>Efecto Indirecto:</strong> Perpetuación del ciclo de pobreza e inequidad territorial.</div>
+              <div class="tree-node tree-node-effect"><strong>Efecto Directo:</strong> Incremento en las tasas de deserción y rezago estudiantil.</div>
+            </div>
+
+            <div style="font-weight: 700; color: var(--danger); font-size: 0.85rem;">TRONCO: PROBLEMA CENTRAL</div>
+            <div class="tree-node tree-node-problem">
+              <strong>Problema Central:</strong><br>
+              Inadecuadas condiciones de infraestructura y alta vulnerabilidad del servicio educativo en la zona rural de la <strong>Entidad 2</strong>.
+            </div>
+
+            <div style="font-weight: 700; color: var(--primary); font-size: 0.85rem;">RAÍCES: CAUSAS (ORÍGENES)</div>
+            <div class="tree-level">
+              <div class="tree-node tree-node-cause"><strong>Causa Directa 1:</strong> Déficit cuantitativo de ambientes de aprendizaje.</div>
+              <div class="tree-node tree-node-cause"><strong>Causa Directa 2:</strong> Deterioro severo de instalaciones existentes por clima extremo.</div>
+            </div>
+            <div class="tree-level">
+              <div class="tree-node tree-node-cause"><small>Causa Indirecta 1.1: Crecimiento demográfico rural no atendido.</small></div>
+              <div class="tree-node tree-node-cause"><small>Causa Indirecta 2.1: Falta de mantenimiento preventivo y obras de drenaje.</small></div>
+            </div>
+          </div>
+
+          <!-- Vista 2: Árbol de Objetivos (Oculto inicialmente) -->
+          <div id="arbol-objetivos-view" class="tree-container" style="display: none;">
+            <div style="font-weight: 700; color: var(--accent); font-size: 0.85rem;">COPA: FINES (IMPACTOS ESPERADOS)</div>
+            <div class="tree-level">
+              <div class="tree-node tree-node-effect"><strong>Fin Último:</strong> Reducción de la pobreza multidimensional y equidad social territorial.</div>
+              <div class="tree-node tree-node-effect"><strong>Fin Directo:</strong> Retención escolar incrementada y superación de la deserción.</div>
+            </div>
+
+            <div style="font-weight: 700; color: var(--success); font-size: 0.85rem;">TRONCO: OBJETIVO GENERAL (PROPÓSITO)</div>
+            <div class="tree-node tree-node-objective">
+              <strong>Objetivo General:</strong><br>
+              Garantizar adecuadas condiciones de infraestructura y ambientes pedagógicos dignos en la zona rural de la <strong>Entidad 2</strong>.
+            </div>
+
+            <div style="font-weight: 700; color: var(--primary); font-size: 0.85rem;">RAÍCES: MEDIOS (OBJETIVOS ESPECÍFICOS)</div>
+            <div class="tree-level">
+              <div class="tree-node tree-node-cause"><strong>Medio Directo 1:</strong> Construir y dotar nuevos ambientes escolares tipo aula.</div>
+              <div class="tree-node tree-node-cause"><strong>Medio Directo 2:</strong> Implementar especificaciones sismorresistentes y adaptadas al clima.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cards-grid">
+          <div class="info-card">
+            <div class="info-card-header">
+              <span class="info-card-icon">👥</span>
+              <h3 class="info-card-title">Matriz de Involucrados</h3>
+            </div>
+            <p>
+              Clasifique los actores según la Matriz Poder-Interés: <strong>Beneficiarios</strong> (estudiantes de Corregimientos A–D), <strong>Cooperantes</strong> (<em>Entidad 2</em> y <em>Entidad 3</em>), <strong>Oponentes</strong> y <strong>Perjudicados</strong>.
+            </p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-header">
+              <span class="info-card-icon">🎯</span>
+              <h3 class="info-card-title">Delimitación de Población</h3>
+            </div>
+            <p>
+              La MGA exige segmentar con rigor DANE: <strong>Población de Referencia</strong> (total municipio), <strong>Población Potencial</strong> (total escolar rural) y <strong>Población Objetivo</strong> (estudiantes beneficiarios directos con enfoque de género).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Módulo 4 -->
+      <section id="modulo-4-preparacion" class="guide-section">
+        <div class="section-header">
+          <div>
+            <span class="section-tag">Operación Técnica</span>
+            <h2 class="section-title">4. Fase de Preparación y Cadena de Valor (Módulo 2 MGA)</h2>
+          </div>
+        </div>
+        <p class="section-lead">
+          Articulación operativa de la alternativa, catálogo estandarizado de productos DNP, desglose de actividades y matriz de riesgos.
+        </p>
+
+        <p>
+          La <strong>Cadena de Valor</strong> es el corazón operativo de la MGA. Conecta los objetivos específicos con productos tangibles del catálogo oficial del DNP y desagrega las actividades indispensables para producirlos:
+        </p>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Paso</th>
+                <th>Acción en MGA-WEB</th>
+                <th>Regla Metodológica Clave</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1</strong></td>
+                <td>Selección de Alternativa</td>
+                <td>Elegir la alternativa técnica y económicamente optimizada en preinversión.</td>
+              </tr>
+              <tr>
+                <td><strong>2</strong></td>
+                <td>Confirmación de Objetivos</td>
+                <td>Objetivos específicos derivados directamente de las causas directas.</td>
+              </tr>
+              <tr>
+                <td><strong>3</strong></td>
+                <td>Asociación de Productos DNP</td>
+                <td>Seleccionar el producto estandarizado del Catálogo de Productos DNP (con su indicador principal oficial).</td>
+              </tr>
+              <tr>
+                <td><strong>4</strong></td>
+                <td>Desglose de Actividades</td>
+                <td>Mínimo 2 actividades por producto. Clasificar por etapa: Preinversión, Inversión u Operación.</td>
+              </tr>
+              <tr>
+                <td><strong>5</strong></td>
+                <td>Marcación de Ruta Crítica</td>
+                <td>Identificar al menos una actividad de ruta crítica por producto.</td>
+              </tr>
+              <tr>
+                <td><strong>6</strong></td>
+                <td>Costeo por 11 Insumos</td>
+                <td>Desagregar cada actividad en mano de obra, materiales, equipos, servicios y transporte.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-info">
+          <div class="callout-title">⚠️ Diferencia Crítica: Actividad vs. Tarea en MGA</div>
+          <p>
+            En MGA-WEB únicamente se registran <strong>Actividades</strong> (acciones con presupuesto, duración y entregables tangibles). Las <em>Tareas</em> son subdivisiones operativas internas del contratista y <strong>no se ingresan en el aplicativo</strong> para evitar saturación y rechazos en la viabilidad técnica.
+          </p>
+        </div>
+
+        <h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; font-size: 1.15rem;">Gestión Integral de Riesgos (3 Niveles Obligatorios)</h3>
+        <p>
+          El aplicativo MGA exige formular y mitigar obligatoriamente riesgos en:
+          <strong>(a) Nivel Propósito</strong> (riesgos de entorno, clima o institucionalidad),
+          <strong>(b) Nivel Componente/Producto</strong> (retrasos en licencias, suministros o contratistas), y
+          <strong>(c) Nivel Actividades de Ruta Crítica</strong>. Todas las medidas de mitigación deben tener presupuesto asignado en la Cadena de Valor.
+        </p>
+      </section>
+
+      <!-- Módulo 5 -->
+      <section id="modulo-5-evaluacion" class="guide-section">
+        <div class="section-header">
+          <div>
+            <span class="section-tag">Evaluación Ex-Ante</span>
+            <h2 class="section-title">5. Evaluación Económica y Social (Módulo 3 MGA)</h2>
+          </div>
+        </div>
+        <p class="section-lead">
+          Conversión a precios de cuenta, aplicación de Razones Precio Cuenta (RPC) y cálculo con la <strong>Tasa Social de Descuento (TSD = 9.0%)</strong>.
+        </p>
+
+        <p>
+          En la evaluación financiera privada se utilizan precios de mercado. En cambio, en la <strong>evaluación económica y social de proyectos públicos</strong>, se ajustan los costos financieros eliminando impuestos, subsidios y distorsiones mediante los factores de <strong>Razones Precio Cuenta (RPC)</strong> emitidos oficialmente por el DNP:
+        </p>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Categoría de Insumo MGA</th>
+                <th>Factor RPC Oficial</th>
+                <th>Justificación Económica del DNP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Mano de Obra Calificada</td>
+                <td><strong>1.00</strong></td>
+                <td>Mercado formal altamente competitivo sin distorsión severa.</td>
+              </tr>
+              <tr>
+                <td>Mano de Obra No Calificada</td>
+                <td><strong>0.60</strong></td>
+                <td>Costo de oportunidad social por desempleo y subempleo rural.</td>
+              </tr>
+              <tr>
+                <td>Materiales de Construcción</td>
+                <td><strong>0.79</strong></td>
+                <td>Descuento del IVA (19%) y márgenes comerciales de intermediación.</td>
+              </tr>
+              <tr>
+                <td>Maquinaria y Equipo</td>
+                <td><strong>0.77</strong></td>
+                <td>Ajuste por aranceles e impuestos indirectos.</td>
+              </tr>
+              <tr>
+                <td>Transporte de Materiales</td>
+                <td><strong>0.75</strong></td>
+                <td>Corrección de peajes, sobretasas y subsidios a combustibles.</td>
+              </tr>
+              <tr>
+                <td>Servicios Técnicos / Consultoría</td>
+                <td><strong>0.71</strong></td>
+                <td>Depuración de retenciones tributarias profesionales.</td>
+              </tr>
+              <tr>
+                <td>Otros Insumos Generales</td>
+                <td><strong>0.80</strong></td>
+                <td>Factor estándar ponderado de conversión nacional.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-warning">
+          <div class="callout-title">🚨 Actualización Crítica: Tasa Social de Descuento (TSD)</div>
+          <p>
+            Mientras que el Manual Conceptual del 2015 utilizaba una tasa del <strong>12%</strong>, el <strong>Instructivo MGA 2023 (Versión 2.0)</strong> estandarizó la <strong>Tasa Social de Descuento en 9.0% efectivo anual en pesos constantes</strong>, derivada del modelo de Harberger por el DNP.
+          </p>
+        </div>
+
+        <!-- Calculadora Interactiva de Evaluación Económica -->
+        <div id="herramienta-calculadora-rpc" class="widget-box">
+          <h3 class="widget-title">📈 Calculadora de Flujo Económico y VPNE (TSD = 9%)</h3>
+          <p class="widget-desc">
+            Ingrese el presupuesto estimado a precios de mercado para las categorías principales y simule la conversión a Flujo Neto Económico y viabilidad con TSD del 9%.
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="c-mo-cal">Mano de Obra Calificada (COP):</label>
+              <input type="number" id="c-mo-cal" class="form-control" value="250000000">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="c-mo-nocal">Mano de Obra No Calificada (COP):</label>
+              <input type="number" id="c-mo-nocal" class="form-control" value="180000000">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="c-materiales">Materiales de Construcción (COP):</label>
+              <input type="number" id="c-materiales" class="form-control" value="550000000">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="c-maquinaria">Maquinaria y Equipo (COP):</label>
+              <input type="number" id="c-maquinaria" class="form-control" value="120000000">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="c-transporte">Transporte y Acarreos (COP):</label>
+              <input type="number" id="c-transporte" class="form-control" value="95000000">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="c-servicios">Servicios y Ensayos (COP):</label>
+              <input type="number" id="c-servicios" class="form-control" value="80000000">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem;">
+            <div class="form-group">
+              <label class="form-label" for="beneficio-anual-social">Beneficio Social Anual Valorado (COP/año):</label>
+              <input type="number" id="beneficio-anual-social" class="form-control" value="195000000">
+              <small style="color: var(--text-muted); font-size: 0.8rem;">Ahorro de costos educativos, retención y valor del tiempo.</small>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="horizonte-evaluacion">Horizonte de Evaluación (Años):</label>
+              <input type="number" id="horizonte-evaluacion" class="form-control" value="10" min="1" max="30">
+              <small style="color: var(--text-muted); font-size: 0.8rem;">Vida útil del proyecto con mantenimiento.</small>
+            </div>
+          </div>
+
+          <button id="btn-calcular-rpc" class="btn btn-primary" style="margin-top: 0.5rem;">Calcular Flujo Económico y VPNE</button>
+
+          <div class="results-grid">
+            <div class="result-card">
+              <div class="result-card-title">Costo Financiero (Mercado)</div>
+              <div id="res-costo-financiero" class="result-card-value">$ 0</div>
+              <div class="result-card-detail">Suma a precios corrientes con IVA.</div>
+            </div>
+            <div class="result-card">
+              <div class="result-card-title">Costo Económico (Ajustado RPC)</div>
+              <div id="res-costo-economico" class="result-card-value">$ 0</div>
+              <div class="result-card-detail">Ajustado por costo social de oportunidad.</div>
+            </div>
+            <div class="result-card">
+              <div class="result-card-title">VPNE (Tasa 9.0%)</div>
+              <div id="res-vpne" class="result-card-value">$ 0</div>
+              <div class="result-card-detail">Valor Presente Neto Social.</div>
+            </div>
+            <div class="result-card">
+              <div class="result-card-title">Relación Beneficio / Costo (RBC)</div>
+              <div id="res-rbc" class="result-card-value">0.00</div>
+              <div class="result-card-detail">Socialmente viable si RBC ≥ 1.0.</div>
+            </div>
+          </div>
+
+          <div id="res-veredicto-economico" style="margin-top: 1rem;" class="callout callout-info">
+            Haga clic en calcular para evaluar la viabilidad social del proyecto.
+          </div>
+        </div>
+      </section>
+
+      <!-- Módulo 6 -->
+      <section id="modulo-6-programacion" class="guide-section">
+        <div class="section-header">
+          <div>
+            <span class="section-tag">Programación</span>
+            <h2 class="section-title">6. Programación y Políticas Transversales (Módulo 4 MGA)</h2>
+          </div>
+        </div>
+        <p class="section-lead">
+          Fuentes de financiación, cronograma físico-financiero, vigencias futuras y marcación de políticas públicas prioritarias.
+        </p>
+
+        <p>
+          En este módulo se asignan los recursos presupuestales específicos por entidad y bienio, y se definen las <strong>Vigencias Futuras</strong> cuando el plazo de ejecución supera el bienio de aprobación:
+        </p>
+
+        <div class="cards-grid">
+          <div class="info-card">
+            <div class="info-card-header">
+              <span class="info-card-icon">📆</span>
+              <h3 class="info-card-title">Vigencias Futuras Ordinarias</h3>
+            </div>
+            <p>
+              Exigen apropiación mínima del <strong>15%</strong> en el bienio vigente de aprobación y no pueden exceder 4 bienios (8 años) ni el 50% de las proyecciones del Plan de Recursos.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card-header">
+              <span class="info-card-icon">⚡</span>
+              <h3 class="info-card-title">Vigencias Futuras de Ejecución</h3>
+            </div>
+            <p>
+              Permiten recibir bienes o servicios y efectuar pagos con posterioridad al vencimiento del bienio presupuestal, sin comprometer recursos de nuevos bienios.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card-header">
+              <span class="info-card-icon">🎯</span>
+              <h3 class="info-card-title">Focalización Transversal</h3>
+            </div>
+            <p>
+              Marcación obligatoria de metas, presupuestos y beneficiarios en: Equidad de la Mujer, Construcción de Paz, Pueblos Étnicos, Víctimas y Cambio Climático.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Módulo 7: Caso Práctico DTS -->
+      <section id="modulo-7-dts" class="guide-section">
+        <div class="section-header">
+          <div>
+            <span class="section-tag">Caso Práctico Real</span>
+            <h2 class="section-title">7. Documento Técnico de Soporte (DTS) — Caso Aulas Escolares</h2>
+          </div>
+        </div>
+        <p class="section-lead">
+          Estructura completa de un DTS en Fase III (Factibilidad) por COP $1.419.432.133 formulado por <strong>Entidad 2</strong> en cofinanciación con <strong>Entidad 3</strong> y con asesoría metodológica de <strong>Entidad 1</strong>.
+        </p>
+
+        <div class="callout callout-info">
+          <div class="callout-title">📋 Ficha Sintética del Proyecto Caso de Estudio</div>
+          <p>
+            • <strong>Proyecto:</strong> Construcción de 8 aulas escolares rurales en 4 centros educativos de la <em>Entidad 2</em>.<br>
+            • <strong>Presupuesto Total:</strong> COP $1.419.432.133 (Infraestructura, interventoría, dotación y planes de contingencia).<br>
+            • <strong>Población Objetivo:</strong> 202 estudiantes rurales directos (110 mujeres y 92 hombres) en Corregimientos A, B, C y D.<br>
+            • <strong>Horizonte de Ejecución:</strong> 24 meses (2 años).
+          </p>
+        </div>
+
+        <h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; font-size: 1.15rem;">Estructura Canónica del DTS en Fase III</h3>
+        <p>
+          Todo Documento Técnico de Soporte radicado ante el SUIFP y OCAD debe contener estrictamente los siguientes 4 capítulos técnicos:
+        </p>
+
+        <div class="cards-grid">
+          <div class="info-card">
+            <div class="info-card-header">
+              <span class="info-card-icon">1️⃣</span>
+              <h4 class="info-card-title">Generalidades de la Entidad</h4>
+            </div>
+            <p>
+              Capacidad técnica, jurídica y operativa de la entidad ejecutora designada (<em>Entidad 2</em>), acuerdos de cofinanciación territorial y designación de supervisión.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card-header">
+              <span class="info-card-icon">2️⃣</span>
+              <h4 class="info-card-title">Identificación y Diagnóstico</h4>
+            </div>
+            <p>
+              Alineación estratégica con planes de desarrollo, caracterización de participantes, delimitación de población de referencia/objetivo y Árbol de Problemas y Objetivos.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card-header">
+              <span class="info-card-icon">3️⃣</span>
+              <h4 class="info-card-title">Preparación de la Alternativa</h4>
+            </div>
+            <p>
+              Estudios geotécnicos y estructurales, diseños arquitectónicos (51,07 m²/aula), presupuesto detallado con APU, tabla de Cadena de Valor (13 actividades) y matriz de riesgos.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card-header">
+              <span class="info-card-icon">4️⃣</span>
+              <h4 class="info-card-title">Evaluación y Sostenibilidad</h4>
+            </div>
+            <p>
+              Evaluación económica a TSD del 9%, cuantificación de beneficios sociales directos y compromisos formales de operación y mantenimiento recurrente con recursos locales.
+            </p>
+          </div>
+        </div>
+
+        <div class="callout callout-warning">
+          <div class="callout-title">⚠️ Alerta Metodológica para Formuladores de DTS</div>
+          <p>
+            En algunos proyectos se suele cometer el error de listar la <em>"generación de empleo durante la obra"</em> como un beneficio social directo. Tanto el Manual Conceptual como el Instructivo MGA advierten que los salarios son un <strong>costo de los insumos del proyecto</strong> y no deben sumarse a los beneficios sociales para no sobreestimar artificialmente el VPNE.
+          </p>
+        </div>
+      </section>
+
+      <!-- Checklist Fase III -->
+      <section id="herramienta-checklist" class="guide-section">
+        <div class="section-header">
+          <div>
+            <span class="section-tag">Auditoría Previa</span>
+            <h2 class="section-title">Checklist de Maduración: Fase III (Factibilidad SGR)</h2>
+          </div>
+          <span id="checklist-counter" class="section-tag" style="background-color: var(--secondary-light); color: var(--secondary);">0 de 6 completados</span>
+        </div>
+        <p class="section-lead">
+          Compruebe si su proyecto cumple los requisitos mínimos no subsanables antes de radicar la solicitud de viabilidad en SUIFP-Territorio.
+        </p>
+
+        <div class="checklist-item">
+          <input type="checkbox" id="chk-1" class="checklist-checkbox">
+          <div class="checklist-content">
+            <label for="chk-1" class="checklist-title">1. Titularidad Jurídica o Posesión Saneada del Predio</label>
+            <div class="checklist-desc">Certificado de Tradición y Libertad sin gravámenes, o certificado de posesión quieta y pacífica por más de 10 años conforme a la Ley 2056.</div>
+          </div>
+        </div>
+
+        <div class="checklist-item">
+          <input type="checkbox" id="chk-2" class="checklist-checkbox">
+          <div class="checklist-content">
+            <label for="chk-2" class="checklist-title">2. Estudios y Diseños Técnicos Definitivos en Fase III</label>
+            <div class="checklist-desc">Planos estructurales, geotécnicos, hidrosanitarios y eléctricos firmados por profesionales con matrícula vigente y sin condicionamientos.</div>
+          </div>
+        </div>
+
+        <div class="checklist-item">
+          <input type="checkbox" id="chk-3" class="checklist-checkbox">
+          <div class="checklist-content">
+            <label for="chk-3" class="checklist-title">3. Presupuesto Detallado con Análisis de Precios Unitarios (APU)</label>
+            <div class="checklist-desc">APU actualizados con fecha no mayor a 6 meses, cotizaciones de mercado y coherencia con los costos de la Cadena de Valor MGA.</div>
+          </div>
+        </div>
+
+        <div class="checklist-item">
+          <input type="checkbox" id="chk-4" class="checklist-checkbox">
+          <div class="checklist-content">
+            <label for="chk-4" class="checklist-title">4. Licencias Ambientales y Permisos Sectoriales en Firme</label>
+            <div class="checklist-desc">Permisos de vertimientos, concesión de aguas o resolución de la autoridad ambiental competente y concordancia con el POT municipal.</div>
+          </div>
+        </div>
+
+        <div class="checklist-item">
+          <input type="checkbox" id="chk-5" class="checklist-checkbox">
+          <div class="checklist-content">
+            <label for="chk-5" class="checklist-title">5. Certificado de Operación y Sostenibilidad Financiera</label>
+            <div class="checklist-desc">Acto administrativo vinculante del representante legal garantizando los recursos para el mantenimiento posterior a la entrega.</div>
+          </div>
+        </div>
+
+        <div class="checklist-item">
+          <input type="checkbox" id="chk-6" class="checklist-checkbox">
+          <div class="checklist-content">
+            <label for="chk-6" class="checklist-title">6. Certificación de Consulta Previa / No Afectación Étnica</label>
+            <div class="checklist-desc">Certificado expedido por la Dirección de Consulta Previa del Ministerio del Interior verificando la ausencia de comunidades étnicas en el área de influencia directa.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Síntesis de Documentos Analizados -->
+      <section id="sintesis-corpus" class="guide-section">
+        <div class="section-header">
+          <div>
+            <span class="section-tag">Bibliografía y Fuentes</span>
+            <h2 class="section-title">Síntesis del Corpus Documental Analizado (495 Páginas)</h2>
+          </div>
+        </div>
+        <p class="section-lead">
+          La presente plataforma sistematiza las 7 fuentes documentales maestras del ciclo de proyectos de inversión:
+        </p>
+
+        <ul style="padding-left: 1.5rem; color: var(--text-muted); line-height: 1.8;">
+          <li><strong>Documento 1:</strong> Módulo 1 — Marco General de Proyectos de Inversión Pública (Elaborado por <em>Entidad 1</em>, 93 páginas).</li>
+          <li><strong>Documento 2:</strong> Módulo 2 — Sistema General de Regalías (SGR) (Elaborado por <em>Entidad 1</em>, 72 páginas).</li>
+          <li><strong>Documento 3:</strong> Módulo 3 — Fase de Identificación (Elaborado por <em>Entidad 1</em>, 52 páginas).</li>
+          <li><strong>Documento 4:</strong> Módulo 4 — Fase de Preparación y Vigencias Futuras (Elaborado por <em>Entidad 1</em>, 50 páginas).</li>
+          <li><strong>Documento 5:</strong> Documento Técnico de Soporte MGA — Caso Práctico de Aulas Escolares (Formulado por <em>Entidad 2</em> y <em>Entidad 3</em>, 13 páginas).</li>
+          <li><strong>Documento 6:</strong> Manual Conceptual de la Metodología General Ajustada — MGA (DNP, 91 páginas).</li>
+          <li><strong>Documento 7:</strong> Instructivo MGA — Proyectos en Colombia (DNP, Versión 2.0 de 2023, 124 páginas).</li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ========================================================================
+       CONTENEDOR DEL MODO PRESENTACIÓN (SLIDE DECK EN PANTALLA COMPLETA)
+       ======================================================================== -->
+  <div id="presentation-view" class="presentation-view">
+    
+    <!-- Barra Superior de Presentación -->
+    <div class="pres-header">
+      <div class="pres-brand">
+        <span class="brand-badge">SLIDES</span>
+        <span>Guía SGR & MGA-WEB: Presentación Ejecutiva</span>
+      </div>
+
+      <div class="pres-controls">
+        <span id="slide-counter" class="slide-counter">1 / 10</span>
+        <button id="btn-prev-slide" class="btn" title="Diapositiva anterior">◀ Ant</button>
+        <button id="btn-next-slide" class="btn btn-primary" title="Diapositiva siguiente">Sig ▶</button>
+        <button id="btn-close-presentation" class="btn" title="Cerrar presentación (Esc)">✖ Salir</button>
+      </div>
+    </div>
+
+    <!-- Escenario de Diapositivas -->
+    <div class="pres-stage">
+      
+      <!-- Diapositiva 1: Portada -->
+      <div class="slide-card active">
+        <div class="slide-top">
+          <div class="slide-category">Capacitación y Formulación</div>
+          <h2 class="slide-title">Formulación de Proyectos en el Sistema General de Regalías & MGA-WEB</h2>
+        </div>
+        <div class="slide-body">
+          <p>
+            Guía metodológica interactiva basada en el análisis integral de 495 páginas de normativa, doctrina MGA del DNP y casos prácticos de estructuración de proyectos de inversión pública en Colombia.
+          </p>
+          <div class="slide-highlight-box">
+            <strong>Marco Institucional:</strong> Metodología de <em>Entidad 1</em> articulada con las directrices del DNP, Ley 2056 de 2020, Decreto 1821 de 2021 y Ley 2441 de 2024.
+          </div>
+        </div>
+        <div class="slide-footer">
+          <span>Use las flechas del teclado [◀ / ▶] o los botones laterales para navegar.</span>
+          <span>Presione Esc para volver a la guía.</span>
+        </div>
+      </div>
+
+      <!-- Diapositiva 2: Qué es un Proyecto SGR -->
+      <div class="slide-card">
+        <div class="slide-top">
+          <div class="slide-category">Módulo 1 — Marco General</div>
+          <h2 class="slide-title">¿Qué es un Proyecto de Inversión Pública en el SGR?</h2>
+        </div>
+        <div class="slide-body">
+          <ul>
+            <li><strong>Definición:</strong> Unidad operacional que vincula recursos para crear, ampliar, mejorar o recuperar la capacidad de producción de bienes o servicios públicos.</li>
+            <li><strong>Regla de Oro:</strong> Con recursos del SGR <strong>solo se financia gasto de inversión</strong>, jamás gastos de funcionamiento o nómina regular permanente.</li>
+            <li><strong>Alineación Estratégica:</strong> Debe articularse con el Plan Nacional de Desarrollo (PND), Planes Departamentales (PDD) y Municipales (PDM).</li>
+            <li><strong>Consulta Previa:</strong> Obligatoria cuando interviene comunidades indígenas, NARP o Rrom (Convenio 169 OIT).</li>
+          </ul>
+        </div>
+        <div class="slide-footer">
+          <span>Ecosistema Digital: MGA-WEB ➔ SUIFP ➔ GESPROY ➔ SECOP II</span>
+          <span>Fuente: Módulo 1 (Entidad 1)</span>
+        </div>
+      </div>
+
+      <!-- Diapositiva 3: Arquitectura Presupuestal SGR -->
+      <div class="slide-card">
+        <div class="slide-top">
+          <div class="slide-category">Módulo 2 — Presupuesto SGR</div>
+          <h2 class="slide-title">Distribución Legal de Ingresos Corrientes SGR</h2>
+        </div>
+        <div class="slide-body">
+          <ul>
+            <li><strong>92.5% Inversión Social y Territorial:</strong>
+              <ul>
+                <li>25% Asignaciones Directas a productores y puertos.</li>
+                <li>34% Inversión Regional (60% Departamentos / 40% OCAD Regional).</li>
+                <li>15% Inversión Local (12.68% municipios más pobres + 2.32% étnicos).</li>
+                <li>10% Ciencia, Tecnología e Innovación (CTeI) con MinCiencias.</li>
+                <li>7% Asignación para la Paz (170 municipios PDET / OCAD Paz).</li>
+                <li>1% Asignación Ambiental y 0.5% Río Magdalena / Canal del Dique.</li>
+              </ul>
+            </li>
+            <li><strong>4.5% Ahorro:</strong> FAE (2.25%) y FONPET (2.25%).</li>
+            <li><strong>3.0% Administración:</strong> Fiscalización (2.0%) y SSEC / DNP (1.0%).</li>
+          </ul>
+        </div>
+        <div class="slide-footer">
+          <span>Bienio 2025–2026: COP $30,9 Billones (Ley 2441 de 2024)</span>
+          <span>Fuente: Ley 2056 de 2020</span>
+        </div>
+      </div>
+
+      <!-- Diapositiva 4: Ciclo de Preinversión -->
+      <div class="slide-card">
+        <div class="slide-top">
+          <div class="slide-category">Módulo 3 — Identificación</div>
+          <h2 class="slide-title">Maduración y Ciclo de Preinversión</h2>
+        </div>
+        <div class="slide-body">
+          <p>
+            El nivel de profundidad técnica de un proyecto depende de su fase de maduración:
+          </p>
+          <ul>
+            <li><strong>Fase I (Perfil):</strong> Información secundaria, nivel de incertidumbre alto.</li>
+            <li><strong>Fase II (Prefactibilidad):</strong> Comparación rigurosa de al menos dos alternativas técnicas mediante estudios especializados.</li>
+            <li><strong>Fase III (Factibilidad):</strong> Ingeniería de detalle, diseños definitivos, licencias en firme y presupuesto con APU. <em>Obligatoria para obras de infraestructura física en el SGR.</em></li>
+          </ul>
+        </div>
+        <div class="slide-footer">
+          <span>Requisito para radicación en SUIFP: Fase III aprobada</span>
+          <span>Doctrina DNP</span>
+        </div>
+      </div>
+
+      <!-- Diapositiva 5: Árbol de Problemas y Objetivos -->
+      <div class="slide-card">
+        <div class="slide-top">
+          <div class="slide-category">Módulo 3 — Metodología EML</div>
+          <h2 class="slide-title">Árbol de Problemas y Árbol de Objetivos</h2>
+        </div>
+        <div class="slide-body">
+          <ul>
+            <li><strong>Regla Básica:</strong> El problema central <strong>nunca es la falta de una solución</strong>, sino la condición negativa existente que afecta a la población.</li>
+            <li><strong>Estructura Causal:</strong>
+              <ul>
+                <li>Causas Directas ➔ Se convierten en los <strong>Objetivos Específicos</strong>.</li>
+                <li>Causas Indirectas ➔ Se convierten en las <strong>Actividades y Componentes</strong>.</li>
+                <li>Efectos ➔ Se convierten en los <strong>Fines e Impactos esperados</strong>.</li>
+              </ul>
+            </li>
+            <li><strong>Alternativas de Solución:</strong> Se configuran agrupando acciones complementarias y descartando opciones no viables.</li>
+          </ul>
+        </div>
+        <div class="slide-footer">
+          <span>Enfoque de Marco Lógico en MGA-WEB</span>
+          <span>Validación causal de abajo hacia arriba</span>
+        </div>
+      </div>
+
+      <!-- Diapositiva 6: Cadena de Valor -->
+      <div class="slide-card">
+        <div class="slide-top">
+          <div class="slide-category">Módulo 4 — Preparación</div>
+          <h2 class="slide-title">Estructuración de la Cadena de Valor en MGA</h2>
+        </div>
+        <div class="slide-body">
+          <ul>
+            <li><strong>Catálogo de Productos DNP:</strong> Selección obligatoria de productos normalizados con unidad de medida e indicadores principales oficiales.</li>
+            <li><strong>Actividades por Etapa:</strong> Desglose por etapas: Preinversión, Inversión u Operación (mínimo 2 actividades por producto).</li>
+            <li><strong>Ruta Crítica:</strong> Marcación indispensable de las actividades secuenciales que determinan la duración total del proyecto.</li>
+            <li><strong>11 Categorías de Insumos:</strong> Costeo detallado en mano de obra calificada/no calificada, materiales, maquinaria, servicios, consultoría y transporte.</li>
+          </ul>
+        </div>
+        <div class="slide-footer">
+          <span>Recuerde: Las tareas operativas no se registran en MGA</span>
+          <span>Manual MGA 2023 v2.0</span>
+        </div>
+      </div>
+
+      <!-- Diapositiva 7: Evaluación Económica TSD 9% -->
+      <div class="slide-card">
+        <div class="slide-top">
+          <div class="slide-category">Módulo 5 — Evaluación Social</div>
+          <h2 class="slide-title">Evaluación Económica: Razones Precio Cuenta y TSD</h2>
+        </div>
+        <div class="slide-body">
+          <ul>
+            <li><strong>Precios de Mercado vs. Precios Sombra:</strong> Los costos financieros se corrigen aplicando factores RPC para reflejar el verdadero costo social de oportunidad.</li>
+            <li><strong>Factores Clave:</strong>
+              <ul>
+                <li>Mano de obra no calificada: <code>0.60</code> (aprovechamiento de mano de obra rural).</li>
+                <li>Materiales de construcción: <code>0.79</code> (depuración de IVA y margen).</li>
+                <li>Maquinaria y equipo: <code>0.77</code> | Servicios: <code>0.71</code>.</li>
+              </ul>
+            </li>
+            <li><strong>Tasa Social de Descuento (TSD):</strong> <strong>9.0% anual en pesos constantes</strong> (actualización oficial del Instructivo MGA 2023 frente al 12% anterior).</li>
+          </ul>
+        </div>
+        <div class="slide-footer">
+          <span>Criterio de Aprobación: VPNE ≥ 0 y RBC ≥ 1.0</span>
+          <span>Modelo DNP / Harberger</span>
+        </div>
+      </div>
+
+      <!-- Diapositiva 8: Caso Práctico DTS -->
+      <div class="slide-card">
+        <div class="slide-top">
+          <div class="slide-category">Módulo 7 — Caso Práctico</div>
+          <h2 class="slide-title">Caso Práctico DTS: Construcción de Aulas Escolares</h2>
+        </div>
+        <div class="slide-body">
+          <ul>
+            <li><strong>Entidad Formuladora y Ejecutora:</strong> <em>Entidad 2</em> en alianza y cofinanciación con <em>Entidad 3</em> y asesoría de <em>Entidad 1</em>.</li>
+            <li><strong>Alcance:</strong> Construcción de 8 aulas escolares rurales (51,07 m² cada una) en 4 centros educativos de Corregimientos A, B, C y D.</li>
+            <li><strong>Presupuesto Total:</strong> COP $1.419.432.133.</li>
+            <li><strong>Lección Crítica de Auditoría:</strong> La mano de obra generada es un <strong>costo/insumo</strong> (ajustado por RPC 0.60) y <em>no debe contabilizarse como un beneficio social directo</em> en el DTS.</li>
+          </ul>
+        </div>
+        <div class="slide-footer">
+          <span>Fase III (Factibilidad) con 13 actividades de obra e interventoría</span>
+          <span>DTS Aulas Rurales</span>
+        </div>
+      </div>
+
+      <!-- Diapositiva 9: Checklist de Viabilidad -->
+      <div class="slide-card">
+        <div class="slide-top">
+          <div class="slide-category">Auditoría Previa</div>
+          <h2 class="slide-title">Requisitos Insubsanables para Viabilidad SGR</h2>
+        </div>
+        <div class="slide-body">
+          <ul>
+            <li>✅ <strong>Titularidad del Predio:</strong> Certificado de Tradición y Libertad sin gravámenes o posesión mayor a 10 años.</li>
+            <li>✅ <strong>Estudios Fase III:</strong> Memorias de cálculo, planos estructurales e hidrosanitarios definitivos firmados.</li>
+            <li>✅ <strong>Presupuesto y APU:</strong> Cotizaciones con vigencia no mayor a 6 meses y coherencia con la Cadena de Valor MGA.</li>
+            <li>✅ <strong>Permisos Ambientales:</strong> Licencias en firme y concordancia con el Plan de Ordenamiento Territorial (POT).</li>
+            <li>✅ <strong>Sostenibilidad:</strong> Certificado formal de asunción de costos de operación y mantenimiento recurrente.</li>
+          </ul>
+        </div>
+        <div class="slide-footer">
+          <span>Evite rechazos y devoluciones en SUIFP y mesas sectoriales</span>
+          <span>Lineamientos DNP</span>
+        </div>
+      </div>
+
+      <!-- Diapositiva 10: Conclusiones -->
+      <div class="slide-card">
+        <div class="slide-top">
+          <div class="slide-category">Cierre y Conclusiones</div>
+          <h2 class="slide-title">Factores de Éxito en Proyectos SGR</h2>
+        </div>
+        <div class="slide-body">
+          <p>
+            Estructurar proyectos exitosos en el Sistema General de Regalías exige articulación metodológica impecable:
+          </p>
+          <ul>
+            <li><strong>Lógica Causal Estricta:</strong> Desde el diagnóstico comunitario hasta los indicadores de producto y resultado.</li>
+            <li><strong>Maduración Técnica:</strong> No escatimar en estudios de detalle antes de la radicación.</li>
+            <li><strong>Rigor Financiero:</strong> Aplicación correcta de factores RPC y la Tasa Social de Descuento del 9%.</li>
+            <li><strong>Transparencia Institucional:</strong> Documento Técnico de Soporte claro, neutral y verificable.</li>
+          </ul>
+        </div>
+        <div class="slide-footer">
+          <span>Guía SGR & MGA-WEB | Desplegada para consulta pública interactiva</span>
+          <span>¡Gracias por su atención!</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Flechas Flotantes -->
+    <button id="pres-nav-prev" class="pres-nav-btn pres-nav-prev" title="Diapositiva anterior">◀</button>
+    <button id="pres-nav-next" class="pres-nav-btn pres-nav-next" title="Diapositiva siguiente">▶</button>
+
+    <!-- Barra de Progreso Inferior -->
+    <div class="pres-progress">
+      <div id="pres-progress-bar" class="pres-progress-bar"></div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
