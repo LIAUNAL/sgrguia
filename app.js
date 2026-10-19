@@ -1,271 +1,280 @@
-/**
- * Guía Interactiva SGR & MGA-WEB
- * Motor interactivo: Dual Mode (Guía + Modo Presentación), Simuladores SGR,
- * Constructor de Árbol de Problemas y Objetivos, y Calculadora de Evaluación Económica (RPC / TSD).
- *
- * Entidades de referencia metodológica:
- * - Entidad 1: Institución académica formuladora de los módulos pedagógicos.
- * - Entidad 2: Entidad territorial municipal ejecutora en el caso práctico del Documento Técnico de Soporte (DTS).
- */
+const slides = Array.from(document.querySelectorAll(".slide"));
+const railModules = Array.from(document.querySelectorAll(".rail-module"));
+const railTitles = Array.from(document.querySelectorAll(".rail-title"));
+const counter = document.getElementById("counter");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+const deckApp = document.querySelector(".deck-app");
+const modeBadge = document.getElementById("mode-badge");
 
-// Estado Global de la Aplicación
-const AppState = {
-  mode: 'guide', // 'guide' | 'presentation'
-  currentSlide: 0,
-  totalSlides: 10,
-  theme: 'light',
-  sgrBudgetBienio: 30900000000000, // $30,9 billones COP (Ley 2441 de 2024, Bienio 2025-2026)
+let current = 0;
+let cleanupTimer = null;
+let lastModule = null;
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+const modeMap = {
+  0: "normal",
+  1: "command",
+  2: "insert",
+  3: "visual",
+  4: "replace",
+  5: "terminal",
+  6: "normal",
+  7: "command",
+  8: "insert",
+  9: "visual",
+  10: "replace",
+  11: "terminal"
 };
 
-// ==========================================================================
-// 1. INICIALIZACIÓN Y EVENT LISTENERS
-// ==========================================================================
-document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
-  initNavigation();
-  initPresentationMode();
-  initSimuladorSGR();
-  initCalculadoraRPC();
-  initArbolInteractivo();
-  initChecklistFaseIII();
-  initSearch();
-});
-
-// ==========================================================================
-// 2. GESTIÓN DE TEMA (CLARO / OSCURO)
-// ==========================================================================
-function initTheme() {
-  const savedTheme = localStorage.getItem('sgr_theme') || 'light';
-  setTheme(savedTheme);
-
-  const themeBtn = document.getElementById('theme-toggle-btn');
-  if (themeBtn) {
-    themeBtn.addEventListener('click', () => {
-      const newTheme = AppState.theme === 'light' ? 'dark' : 'light';
-      setTheme(newTheme);
-    });
-  }
-}
-
-function setTheme(theme) {
-  AppState.theme = theme;
-  document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('sgr_theme', theme);
-  const themeBtn = document.getElementById('theme-toggle-btn');
-  if (themeBtn) {
-    themeBtn.innerHTML = theme === 'light' ? '🌙 Modo Oscuro' : '☀️ Modo Claro';
-  }
-}
-
-// ==========================================================================
-// 3. NAVEGACIÓN Y MODO GUÍA
-// ==========================================================================
-function initNavigation() {
-  const navLinks = document.querySelectorAll('.sidebar .nav-item a');
-  navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      navLinks.forEach(l => l.parentElement.classList.remove('active'));
-      link.parentElement.classList.add('active');
-    });
+function buildDots() {
+  const moduleMap = {};
+  slides.forEach((slide, idx) => {
+    const mod = slide.dataset.module;
+    if (!moduleMap[mod]) moduleMap[mod] = [];
+    moduleMap[mod].push(idx);
   });
 
-  // Botón para alternar a Modo Presentación
-  const modeBtn = document.getElementById('btn-toggle-presentation');
-  if (modeBtn) {
-    modeBtn.addEventListener('click', () => {
-      togglePresentationMode(true);
+  Object.entries(moduleMap).forEach(([mod, indices]) => {
+    const container = document.getElementById(`dots-${mod}`);
+    if (!container) return;
+    indices.forEach((slideIdx) => {
+      const pip = document.createElement("button");
+      pip.className = "rail-pip";
+      pip.dataset.slide = slideIdx;
+      pip.setAttribute("aria-label", `Slide ${slideIdx + 1}`);
+      pip.addEventListener("click", () => render(slideIdx));
+      container.appendChild(pip);
     });
+  });
+}
+
+function pad(value) {
+  return String(value).padStart(2, "0");
+}
+
+function cleanupTransitionClasses(slide) {
+  slide.classList.remove(
+    "is-entering",
+    "is-leaving",
+    "from-next",
+    "from-prev",
+    "to-next",
+    "to-prev"
+  );
+}
+
+function updateChrome() {
+  const pips = Array.from(document.querySelectorAll(".rail-pip"));
+  pips.forEach((pip) => {
+    pip.classList.toggle("is-active", Number(pip.dataset.slide) === current);
+  });
+
+  const currentModule = slides[current]?.dataset.module;
+  const moduleChanged = currentModule !== lastModule;
+  railModules.forEach((mod) => {
+    const isActive = mod.dataset.module === currentModule;
+    mod.classList.toggle("is-active-module", isActive);
+    if (isActive && moduleChanged) {
+      mod.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+    }
+  });
+  lastModule = currentModule;
+
+  counter.textContent = `${pad(current + 1)} / ${pad(slides.length)}`;
+
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === slides.length - 1;
+
+  const tone = slides[current]?.dataset.tone;
+  const moduleIdx = Number(currentModule);
+  const mode = modeMap[moduleIdx] || "normal";
+
+  deckApp.className = deckApp.className
+    .replace(/tone-\w+/g, "")
+    .replace(/mode-\w+/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (tone) deckApp.classList.add(`tone-${tone}`);
+  deckApp.classList.add(`mode-${mode}`);
+
+  if (modeBadge) {
+    modeBadge.textContent = mode.toUpperCase();
   }
 }
 
-// ==========================================================================
-// 4. MODO PRESENTACIÓN (SLIDE DECK)
-// ==========================================================================
-function initPresentationMode() {
-  const slides = document.querySelectorAll('.slide-card');
-  AppState.totalSlides = slides.length;
+function render(index, options = {}) {
+  const { animate = true } = options;
+  const next = Math.max(0, Math.min(index, slides.length - 1));
 
-  const btnClose = document.getElementById('btn-close-presentation');
-  const btnPrev = document.getElementById('btn-prev-slide');
-  const btnNext = document.getElementById('btn-next-slide');
-  const btnNavPrev = document.getElementById('pres-nav-prev');
-  const btnNavNext = document.getElementById('pres-nav-next');
+  if (next === current) {
+    updateChrome();
+    return;
+  }
 
-  if (btnClose) btnClose.addEventListener('click', () => togglePresentationMode(false));
-  if (btnPrev) btnPrev.addEventListener('click', prevSlide);
-  if (btnNext) btnNext.addEventListener('click', nextSlide);
-  if (btnNavPrev) btnNavPrev.addEventListener('click', prevSlide);
-  if (btnNavNext) btnNavNext.addEventListener('click', nextSlide);
+  const previous = current;
+  current = next;
+  try { localStorage.setItem("deck-slide-v2", current); } catch (_) {}
 
-  // Atajos de teclado
-  window.addEventListener('keydown', (e) => {
-    if (AppState.mode !== 'presentation') return;
+  // Una pulsacion nueva cancela la transicion en curso en vez de descartarse.
+  if (cleanupTimer) {
+    window.clearTimeout(cleanupTimer);
+    cleanupTimer = null;
+  }
 
-    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
-      e.preventDefault();
-      nextSlide();
-    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-      e.preventDefault();
-      prevSlide();
-    } else if (e.key === 'Escape') {
-      e.preventDefault();
-      togglePresentationMode(false);
+  const currentSlide = slides[current];
+  const previousSlide = slides[previous];
+
+  // Cualquier slide ajeno a la transicion vuelve a su estado de reposo.
+  slides.forEach((slide, idx) => {
+    if (idx !== current && idx !== previous) {
+      cleanupTransitionClasses(slide);
+      slide.classList.remove("is-active");
     }
   });
 
-  updateSlideDisplay();
-}
+  cleanupTransitionClasses(previousSlide);
+  cleanupTransitionClasses(currentSlide);
 
-function togglePresentationMode(show) {
-  const presView = document.getElementById('presentation-view');
-  if (!presView) return;
-
-  if (show) {
-    AppState.mode = 'presentation';
-    presView.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    updateSlideDisplay();
-  } else {
-    AppState.mode = 'guide';
-    presView.classList.remove('active');
-    document.body.style.overflow = 'auto';
+  if (!animate || reduceMotion.matches) {
+    previousSlide.classList.remove("is-active");
+    currentSlide.classList.add("is-active");
+    updateChrome();
+    return;
   }
+
+  const direction = next > previous ? "next" : "prev";
+
+  previousSlide.classList.remove("is-active");
+  previousSlide.classList.add("is-leaving", direction === "next" ? "to-next" : "to-prev");
+
+  currentSlide.classList.add("is-active", "is-entering", direction === "next" ? "from-next" : "from-prev");
+
+  cleanupTimer = window.setTimeout(() => {
+    slides.forEach((slide) => {
+      cleanupTransitionClasses(slide);
+      if (slide !== slides[current]) slide.classList.remove("is-active");
+    });
+    cleanupTimer = null;
+  }, 440);
+
+  updateChrome();
 }
 
-function nextSlide() {
-  if (AppState.currentSlide < AppState.totalSlides - 1) {
-    AppState.currentSlide++;
-    updateSlideDisplay();
-  }
-}
-
-function prevSlide() {
-  if (AppState.currentSlide > 0) {
-    AppState.currentSlide--;
-    updateSlideDisplay();
-  }
-}
-
-function updateSlideDisplay() {
-  const slides = document.querySelectorAll('.slide-card');
-  slides.forEach((slide, index) => {
-    slide.classList.toggle('active', index === AppState.currentSlide);
+railTitles.forEach((title) => {
+  title.addEventListener("click", () => {
+    const firstSlide = Number(title.dataset.first);
+    if (!Number.isFinite(firstSlide)) return;
+    render(firstSlide);
   });
+});
 
-  const counter = document.getElementById('slide-counter');
-  if (counter) {
-    counter.textContent = `${AppState.currentSlide + 1} / ${AppState.totalSlides}`;
-  }
+prevBtn.addEventListener("click", () => render(current - 1));
+nextBtn.addEventListener("click", () => render(current + 1));
 
-  const progressBar = document.getElementById('pres-progress-bar');
-  if (progressBar && AppState.totalSlides > 0) {
-    const percent = ((AppState.currentSlide + 1) / AppState.totalSlides) * 100;
-    progressBar.style.width = `${percent}%`;
+window.addEventListener("keydown", (event) => {
+  const opts = { animate: !event.repeat };
+  if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
+    event.preventDefault();
+    render(current + 1, opts);
   }
-}
+  if (event.key === "ArrowLeft" || event.key === "PageUp") {
+    event.preventDefault();
+    render(current - 1, opts);
+  }
+  if (event.key === "Home") render(0);
+  if (event.key === "End") render(slides.length - 1);
+  if (event.key.toLowerCase() === "f") {
+    document.body.classList.toggle("focus-mode");
+  }
+});
+
+let touchStartX = 0;
+window.addEventListener("touchstart", (event) => {
+  touchStartX = event.changedTouches[0].screenX;
+});
+window.addEventListener("touchend", (event) => {
+  const touchEndX = event.changedTouches[0].screenX;
+  const delta = touchEndX - touchStartX;
+  if (Math.abs(delta) < 40) return;
+  if (delta < 0) render(current + 1);
+  if (delta > 0) render(current - 1);
+});
 
 // ==========================================================================
-// 5. SIMULADOR DE DISTRIBUCIÓN SGR (Ley 2056/2020 y Presupuesto Bienal)
+// HERRAMIENTAS INTERACTIVAS METODOLÓGICAS (SGR & MGA-WEB)
+// Referencias: Entidad 1 (Académica) y Entidad 2 (Municipal en DTS)
+// Modo Presentación de alta interactividad
 // ==========================================================================
+
 function initSimuladorSGR() {
-  const inputPresupuesto = document.getElementById('sgr-presupuesto-input');
-  const btnCalcular = document.getElementById('btn-calcular-sgr');
+  const inputPresupuesto = document.getElementById("sgr-presupuesto-input");
+  const btnCalcular = document.getElementById("btn-calcular-sgr");
 
   if (btnCalcular && inputPresupuesto) {
-    btnCalcular.addEventListener('click', () => {
-      const valor = parseFloat(inputPresupuesto.value) || AppState.sgrBudgetBienio;
+    btnCalcular.addEventListener("click", () => {
+      const valor = parseFloat(inputPresupuesto.value) || 30900000000000;
       calcularDistribucionSGR(valor);
     });
-    // Cálculo inicial
-    calcularDistribucionSGR(AppState.sgrBudgetBienio);
+    calcularDistribucionSGR(30900000000000);
   }
 }
 
 function calcularDistribucionSGR(total) {
-  const formatoCOP = new Intl.NumberFormat('es-CO', {
-    style: 'currency',
-    currency: 'COP',
+  const formatoCOP = new Intl.NumberFormat("es-CO", {
+    style: "currency",
+    currency: "COP",
     maximumFractionDigits: 0
   });
 
-  // Reglas Legales de Distribución de Ingresos Corrientes SGR:
-  // 1. Inversión: 92.5%
-  const inversionTotal = total * 0.925;
-  const asigDirectas = total * 0.25; // 25% (20% directas + 5% anticipadas)
-  const invRegional = total * 0.34;  // 34% (60% Dptos: 20.4%, 40% Regiones: 13.6%)
-  const invRegionalDptos = invRegional * 0.60;
-  const invRegionalOCAD = invRegional * 0.40;
-  const invLocal = total * 0.15;     // 15% (12.68% municipios pobres + 2.32% étnicos)
-  const ctei = total * 0.10;         // 10% (min 20% ambiental)
-  const paz = total * 0.07;          // 7% municipios PDET
-  const ambiental = total * 0.01;    // 1% conservación
-  const rioMagdalena = total * 0.005; // 0.5% ribereños y Canal del Dique
+  const elInversion = document.getElementById("res-sgr-inversion");
+  const elAhorro = document.getElementById("res-sgr-ahorro");
+  const elAdmin = document.getElementById("res-sgr-admin");
+  const elDirectas = document.getElementById("res-sgr-directas");
+  const elRegional = document.getElementById("res-sgr-regional");
+  const elLocal = document.getElementById("res-sgr-local");
+  const elCtei = document.getElementById("res-sgr-ctei");
+  const elPaz = document.getElementById("res-sgr-paz");
 
-  // 2. Ahorro: 4.5%
-  const ahorroTotal = total * 0.045;
-  const fae = total * 0.0225;
-  const fonpet = total * 0.0225;
-
-  // 3. Administración y Control: 3%
-  const adminTotal = total * 0.03;
-  const funcionamiento = total * 0.02;
-  const ssec = total * 0.01;
-
-  // Actualizar DOM
-  const elInversion = document.getElementById('res-sgr-inversion');
-  const elAhorro = document.getElementById('res-sgr-ahorro');
-  const elAdmin = document.getElementById('res-sgr-admin');
-  const elDirectas = document.getElementById('res-sgr-directas');
-  const elRegional = document.getElementById('res-sgr-regional');
-  const elLocal = document.getElementById('res-sgr-local');
-  const elCtei = document.getElementById('res-sgr-ctei');
-  const elPaz = document.getElementById('res-sgr-paz');
-
-  if (elInversion) elInversion.textContent = formatoCOP.format(inversionTotal);
-  if (elAhorro) elAhorro.textContent = formatoCOP.format(ahorroTotal);
-  if (elAdmin) elAdmin.textContent = formatoCOP.format(adminTotal);
-  if (elDirectas) elDirectas.textContent = formatoCOP.format(asigDirectas);
-  if (elRegional) elRegional.textContent = `${formatoCOP.format(invRegional)} (Dptos: ${formatoCOP.format(invRegionalDptos)} / OCAD: ${formatoCOP.format(invRegionalOCAD)})`;
-  if (elLocal) elLocal.textContent = formatoCOP.format(invLocal);
-  if (elCtei) elCtei.textContent = formatoCOP.format(ctei);
-  if (elPaz) elPaz.textContent = formatoCOP.format(paz);
+  if (elInversion) elInversion.textContent = formatoCOP.format(total * 0.925);
+  if (elAhorro) elAhorro.textContent = formatoCOP.format(total * 0.045);
+  if (elAdmin) elAdmin.textContent = formatoCOP.format(total * 0.03);
+  if (elDirectas) elDirectas.textContent = formatoCOP.format(total * 0.25);
+  if (elRegional) elRegional.textContent = formatoCOP.format(total * 0.34);
+  if (elLocal) elLocal.textContent = formatoCOP.format(total * 0.15);
+  if (elCtei) elCtei.textContent = formatoCOP.format(total * 0.10);
+  if (elPaz) elPaz.textContent = formatoCOP.format(total * 0.07);
 }
 
-// ==========================================================================
-// 6. CONSTRUCTOR INTERACTIVO: ÁRBOL DE PROBLEMAS Y ÁRBOL DE OBJETIVOS
-// ==========================================================================
 function initArbolInteractivo() {
-  const btnToggleArbol = document.getElementById('btn-toggle-arbol');
-  const arbolProblemasView = document.getElementById('arbol-problemas-view');
-  const arbolObjetivosView = document.getElementById('arbol-objetivos-view');
+  const btnToggleArbol = document.getElementById("btn-toggle-arbol");
+  const arbolProblemasView = document.getElementById("arbol-problemas-view");
+  const arbolObjetivosView = document.getElementById("arbol-objetivos-view");
 
   let showingObjetivos = false;
 
   if (btnToggleArbol && arbolProblemasView && arbolObjetivosView) {
-    btnToggleArbol.addEventListener('click', () => {
+    btnToggleArbol.addEventListener("click", () => {
       showingObjetivos = !showingObjetivos;
       if (showingObjetivos) {
-        arbolProblemasView.style.display = 'none';
-        arbolObjetivosView.style.display = 'flex';
-        btnToggleArbol.innerHTML = '🔄 Ver Árbol de Problemas';
+        arbolProblemasView.style.display = "none";
+        arbolObjetivosView.style.display = "flex";
+        btnToggleArbol.textContent = "Ver Árbol de Problemas";
       } else {
-        arbolProblemasView.style.display = 'flex';
-        arbolObjetivosView.style.display = 'none';
-        btnToggleArbol.innerHTML = '🔄 Transformar a Árbol de Objetivos';
+        arbolProblemasView.style.display = "flex";
+        arbolObjetivosView.style.display = "none";
+        btnToggleArbol.textContent = "Transformar a Árbol de Objetivos";
       }
     });
   }
 }
 
-// ==========================================================================
-// 7. CALCULADORA DE EVALUACIÓN ECONÓMICA (RPC y TSD = 9%)
-// ==========================================================================
 function initCalculadoraRPC() {
-  const btnCalcularRPC = document.getElementById('btn-calcular-rpc');
+  const btnCalcularRPC = document.getElementById("btn-calcular-rpc");
   if (!btnCalcularRPC) return;
 
-  btnCalcularRPC.addEventListener('click', () => {
-    // Factores Oficiales RPC según Manual Conceptual e Instructivo MGA 2023:
+  btnCalcularRPC.addEventListener("click", () => {
     const rpcFactors = {
       moCalificada: 1.00,
       moNoCalificada: 0.60,
@@ -276,16 +285,15 @@ function initCalculadoraRPC() {
       otros: 0.80
     };
 
-    const cMoCal = parseFloat(document.getElementById('c-mo-cal')?.value) || 0;
-    const cMoNoCal = parseFloat(document.getElementById('c-mo-nocal')?.value) || 0;
-    const cMat = parseFloat(document.getElementById('c-materiales')?.value) || 0;
-    const cMaq = parseFloat(document.getElementById('c-maquinaria')?.value) || 0;
-    const cTrans = parseFloat(document.getElementById('c-transporte')?.value) || 0;
-    const cServ = parseFloat(document.getElementById('c-servicios')?.value) || 0;
-    const cOtros = parseFloat(document.getElementById('c-otros')?.value) || 0;
+    const cMoCal = parseFloat(document.getElementById("c-mo-cal")?.value) || 0;
+    const cMoNoCal = parseFloat(document.getElementById("c-mo-nocal")?.value) || 0;
+    const cMat = parseFloat(document.getElementById("c-materiales")?.value) || 0;
+    const cMaq = parseFloat(document.getElementById("c-maquinaria")?.value) || 0;
+    const cTrans = parseFloat(document.getElementById("c-transporte")?.value) || 0;
+    const cServ = parseFloat(document.getElementById("c-servicios")?.value) || 0;
+    const cOtros = parseFloat(document.getElementById("c-otros")?.value) || 0;
 
     const costoFinancieroTotal = cMoCal + cMoNoCal + cMat + cMaq + cTrans + cServ + cOtros;
-
     const costoEconomicoTotal = (cMoCal * rpcFactors.moCalificada) +
       (cMoNoCal * rpcFactors.moNoCalificada) +
       (cMat * rpcFactors.materiales) +
@@ -294,13 +302,10 @@ function initCalculadoraRPC() {
       (cServ * rpcFactors.servicios) +
       (cOtros * rpcFactors.otros);
 
-    const beneficioAnualSocial = parseFloat(document.getElementById('beneficio-anual-social')?.value) || 0;
-    const horizonteAnos = parseInt(document.getElementById('horizonte-evaluacion')?.value) || 10;
+    const beneficioAnualSocial = parseFloat(document.getElementById("beneficio-anual-social")?.value) || 0;
+    const horizonteAnos = parseInt(document.getElementById("horizonte-evaluacion")?.value) || 10;
     const tsd = 0.09; // Tasa Social de Descuento = 9% según Instructivo MGA 2023 DNP
 
-    // Cálculo del Valor Presente Neto Económico (VPNE)
-    // Flujo en t=0 es -costoEconomicoTotal
-    // Flujos en t=1..horizonte son beneficioAnualSocial
     let vpnBeneficios = 0;
     for (let t = 1; t <= horizonteAnos; t++) {
       vpnBeneficios += beneficioAnualSocial / Math.pow(1 + tsd, t);
@@ -308,80 +313,59 @@ function initCalculadoraRPC() {
     const vpne = vpnBeneficios - costoEconomicoTotal;
     const rbc = costoEconomicoTotal > 0 ? (vpnBeneficios / costoEconomicoTotal) : 0;
 
-    const formatoCOP = new Intl.NumberFormat('es-CO', {
-      style: 'currency',
-      currency: 'COP',
+    const formatoCOP = new Intl.NumberFormat("es-CO", {
+      style: "currency",
+      currency: "COP",
       maximumFractionDigits: 0
     });
 
-    const elCostoFinanciero = document.getElementById('res-costo-financiero');
-    const elCostoEconomico = document.getElementById('res-costo-economico');
-    const elVpne = document.getElementById('res-vpne');
-    const elRbc = document.getElementById('res-rbc');
-    const elVeredicto = document.getElementById('res-veredicto-economico');
+    const elCostoFinanciero = document.getElementById("res-costo-financiero");
+    const elCostoEconomico = document.getElementById("res-costo-economico");
+    const elVpne = document.getElementById("res-vpne");
+    const elRbc = document.getElementById("res-rbc");
+    const elVeredicto = document.getElementById("res-veredicto-economico");
 
     if (elCostoFinanciero) elCostoFinanciero.textContent = formatoCOP.format(costoFinancieroTotal);
     if (elCostoEconomico) elCostoEconomico.textContent = formatoCOP.format(costoEconomicoTotal);
     if (elVpne) {
       elVpne.textContent = formatoCOP.format(vpne);
-      elVpne.style.color = vpne >= 0 ? 'var(--success)' : 'var(--danger)';
+      elVpne.style.color = vpne >= 0 ? "var(--green)" : "var(--red)";
     }
     if (elRbc) elRbc.textContent = rbc.toFixed(2);
     if (elVeredicto) {
       if (vpne >= 0) {
-        elVeredicto.textContent = '✅ Proyecto Económica y Socialmente Viable (VPNE ≥ 0 a TSD del 9%)';
-        elVeredicto.className = 'callout callout-success';
+        elVeredicto.textContent = "✅ Proyecto Viable Económica y Socialmente (VPNE ≥ 0 a TSD del 9%)";
+        elVeredicto.style.color = "var(--green)";
       } else {
-        elVeredicto.textContent = '⚠️ Proyecto No Viable Económicamente con los supuestos actuales (VPNE < 0 a TSD del 9%)';
-        elVeredicto.className = 'callout callout-warning';
+        elVeredicto.textContent = "⚠️ Proyecto No Viable Económicamente (VPNE < 0 a TSD del 9%)";
+        elVeredicto.style.color = "var(--red)";
       }
     }
   });
 }
 
-// ==========================================================================
-// 8. CHECKLIST DE MADURACIÓN FASE III (FACTIBILIDAD SGR)
-// ==========================================================================
 function initChecklistFaseIII() {
-  const checkboxes = document.querySelectorAll('.checklist-checkbox');
-  const counterEl = document.getElementById('checklist-counter');
+  const checkboxes = document.querySelectorAll(".deck-checklist-cb");
+  const counterEl = document.getElementById("checklist-counter");
 
   function updateChecklistProgress() {
     if (!checkboxes.length || !counterEl) return;
     const total = checkboxes.length;
     const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
-    counterEl.textContent = `${checked} de ${total} requisitos completados (${Math.round((checked / total) * 100)}%)`;
+    counterEl.textContent = `${checked} / ${total} cumplidos (${Math.round((checked / total) * 100)}%)`;
   }
 
-  checkboxes.forEach(cb => {
-    cb.addEventListener('change', updateChecklistProgress);
-  });
+  checkboxes.forEach(cb => cb.addEventListener("change", updateChecklistProgress));
   updateChecklistProgress();
 }
 
-// ==========================================================================
-// 9. BUSCADOR INTERNO EN LA GUÍA
-// ==========================================================================
-function initSearch() {
-  const searchInput = document.getElementById('global-search-input');
-  if (!searchInput) return;
+buildDots();
+const saved = Number(localStorage.getItem("deck-slide-v2")) || 0;
+render(Math.min(saved, slides.length - 1), { animate: false });
 
-  searchInput.addEventListener('input', (e) => {
-    const term = e.target.value.toLowerCase().trim();
-    const sections = document.querySelectorAll('.guide-section');
-
-    if (!term) {
-      sections.forEach(sec => sec.style.display = 'block');
-      return;
-    }
-
-    sections.forEach(sec => {
-      const text = sec.textContent.toLowerCase();
-      if (text.includes(term)) {
-        sec.style.display = 'block';
-      } else {
-        sec.style.display = 'none';
-      }
-    });
-  });
-}
+document.addEventListener("DOMContentLoaded", () => {
+  initSimuladorSGR();
+  initArbolInteractivo();
+  initCalculadoraRPC();
+  initChecklistFaseIII();
+});
