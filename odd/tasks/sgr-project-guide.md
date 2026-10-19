@@ -10,12 +10,13 @@ Branch: feat/sgr-web-guide | Strategy: exception-ok (single cohesive static web 
 
 ## Tasks
 
-- [x] **T1** (S1, S3) | Route: inline | Setup `.gitignore`, automated verification test suite (`tests/verify-guide.mjs`), and comprehensive corpus analysis (`docs/analisis-corpus-sgr.md`) | Commit: pending
-- [x] **T2** (S1, S2, S3) | Route: inline | Build interactive SGR/MGA Web Guide & Presentation (`index.html`, `styles.css`, `app.js`, `README.md`) with Dual Mode (Guide + Presentation), interactive tools, and anonymized case study (`Entidad 1`, `Entidad 2`) | Commit: pending
-- [ ] **T3** (S4) | Route: inline + independent verifier (High Risk item 5: deploy) | Create repository in `github.com/orgs/liaunal`, deploy to GitHub Pages, and run independent verification | Commit: pending
+- [x] **T1** (S1, S3) | Route: inline | Setup `.gitignore`, automated verification test suite (`tests/verify-guide.mjs`), and comprehensive corpus analysis (`docs/analisis-corpus-sgr.md`) | Commit: f3778e6
+- [x] **T2** (S1, S2, S3) | Route: inline | Build interactive SGR/MGA Web Guide & Presentation (`index.html`, `styles.css`, `app.js`, `README.md`) with Dual Mode (Guide + Presentation), interactive tools, and anonymized case study (`Entidad 1`, `Entidad 2`) | Commit: 4bac824
+- [x] **T3** (S4) | Route: inline + independent verifier (High Risk item 5: deploy) | Create repository in `github.com/orgs/liaunal`, deploy to GitHub Pages, and run independent verification | Commit: c7b6b14 | URL: https://liaunal.github.io/sgrguia/
 
 ## Log
 
 - **L1** (2026-10-19): Initial request: review the source documents, generate an integral analysis, build a general guide for writing SGR projects as an interactive web page and presentation for GitHub Pages under github.com/orgs/liaunal, with strict anonymization (`Entidad 1`, `Entidad 2`, etc.).
 - **L2** (2026-10-19): Explorer subagent mapped all 7 PDFs (495 total pages across modules, manuals, and DTS example) and cataloged all institutional/territorial names requiring anonymization (`Entidad 1`, `Entidad 2`, etc.).
 - **L3** (2026-10-19): Completed T1 and T2: Created `.gitignore`, test runner `tests/verify-guide.mjs`, corpus analysis `docs/analisis-corpus-sgr.md`, interactive web guide `index.html`, styles `styles.css`, motor `app.js`, and `README.md`. Automated tests passing 3/3.
+- **L4** (2026-10-19): Completed T3: Created repository `LIAUNAL/sgrguia` on GitHub, configured and triggered GitHub Pages deployment via GitHub Actions workflow, verified HTTP 200 and live site delivery at `https://liaunal.github.io/sgrguia/`.
